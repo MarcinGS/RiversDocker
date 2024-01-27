@@ -1,0 +1,25 @@
+services:
+  db:
+   image: mysql
+   restart: always
+   environment:
+    MYSQL_ROOT_PASSWORD: kret
+    MYSQL_DATABASE: rlm
+   volumes:
+    - ./sql:/docker-entrypoint-initdb.d 
+  frontend:
+   build: ./frontend
+   restart: always
+   ports:
+      - "80:80"   
+  api:
+   build: ./backend
+   restart: always   
+   environment:
+    DATABASE_URL: db 
+
+
+
+ 
+    
+    
